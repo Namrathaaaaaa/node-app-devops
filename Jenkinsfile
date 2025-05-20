@@ -3,7 +3,7 @@ pipeline {
 
     environment{
         dockerimagename = "namratha3/dev-nodeapp"
-        dockerImage = ""
+        registryCredential = 'dockerhublogin'
     }
     stages {
         stage('Checkout Source'){
@@ -15,15 +15,12 @@ pipeline {
         stage('Build image'){
             steps{
                 script{
-                    dockerImage = docker build dockerimagename
+                    dockerImage = docker.build(dockerimagename)
                 }
             }
         }
 
-        steps('Pushing Image'){
-            environment {
-                registryCredential = 'dockerhublogin'
-            }
+        stage('Pushing Image'){
             steps{
                 script{
                     docker.withRegistry('https://registry.hub.docker.com', registryCredential){
