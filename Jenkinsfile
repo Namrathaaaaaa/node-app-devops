@@ -6,9 +6,9 @@ pipeline {
         registryCredential = 'dockerhublogin'
     }
     stages {
-        stage('Checkout Source'){
-            steps{
-                git 'https://github.com/Namrathaaaaaa/node-app-devops.git'
+       stage('Checkout Source') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Namrathaaaaaa/node-app-devops.git'
             }
         }
 
